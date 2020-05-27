@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Sign In </h2>
+    <!-- Login Form -->
+    <form method="post" action="/login/">
+        {% csrf_token %}
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+      <input type="submit">
+    </form>
+      <div>
+          {% for message in messages %}
+          <h3>{{ message }}</h3>
+          {% endfor %}
+      </div>
+  </div>
+</div>
+
+</body>
+</html>

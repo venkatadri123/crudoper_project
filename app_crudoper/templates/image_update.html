@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+<form method="post" class="post-form" action="/image_update/{{student.Student_ID}}" enctype="multipart/form-data">
+    {% csrf_token %}
+{#    {{ form.as_p }}#}
+    <div class="container">
+        <div class="form-group row">
+            <label class="col-sm-1 col-form-label"></label>
+            <div class="col-sm-4">
+                <h3>Update Details</h3>
+            </div>
+        </div>
+        <div class="form-group row">
+            {{ form.as_p }}
+            Existing Image:{{ student.Image.url }}<br><p></p>
+            Student Id  :<input type="text" name="id" id="id_eid" required maxlength="20" value="{{ student.Student_ID }}"/><br><p></p>
+            Student Name:<input type="text" name="name" id="id_ename" required maxlength="100" value="{{ student.Name }}" /><br><p></p>
+            Email       :<input type="email" name="email" id="id_eemail" required maxlength="254" value="{{ student.Email }}" /><br><p></p>
+            School      :<input type="text" name="school" id="id_econtact" required maxlength="15" value="{{ student.School }}" /><br><p></p>
+            Program     :<input type="text" name="program" id="id_econtact" required maxlength="15" value="{{ student.Program }}" /><br><p></p>
+            Batch       :<input type="text" name="batch" id="id_econtact" required maxlength="15" value="{{ student.Batch }}" /><br><p></p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-1 col-form-label"></label>
+        <div class="col-sm-4">
+            <button type="submit" class="btn btn-success">Update</button>
+            <a href="/show/" name="submit" class="btn btn-primary">Back</a>
+        </div>
+    </div>
+</form>
+</body>
+</html>
