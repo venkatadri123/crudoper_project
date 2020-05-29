@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% static 'images' as baseUrl %}
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Record</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+<body>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th width="10%">Image</th>
+            <th width="10%">Student_ID</th>
+            <th width="10%">Name</th>
+            <th width="10%">Email</th>
+            <th width="10%">School</th>
+            <th width="10%">Program</th>
+            <th width="10%">Batch</th>
+            <td width="10%">Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% if students.Approvel %}
+                <td><img src="{{ students.Image.url }}" alt="" class="img-thumbnail" width="30%" height="30%"></td>
+            {% else %}
+                <td><img src="{{ students.Image }}" alt="" class="img-thumbnail" width="30%" height="30%">Pending approval</td>
+            {% endif %}
+            <td>{{ students.Student_ID }}</td>
+            <td>{{ students.Name }}</td>
+            <td>{{ students.Email }}</td>
+            <td>{{ students.School}}</td>
+            <td>{{ students.Program }}</td>
+            <td>{{ students.Batch }}</td>
+            <td>
+                <a href="/image_update/{{ students.Student_ID }}" class="btn btn-primary">Edit_Image</a>
+                <a href="/update/{{ students.Student_ID }}/{{ students.Username }}" class="btn btn-primary">Edit_Data</a>
+                <a href="/view/{{ students.Student_ID }}" class="btn btn-primary">View</a>
+                <a href="/delete/{{ students.Student_ID }}/{{ students.Username }}" class="btn btn-primary">Delete</a>
+            </td>
+        </tr>
+
+    </tbody>
+</table><br>
+<div align="center"><a href="/logout/" class="btn btn-primary">Logout</a></div>
+</body>
+</html>

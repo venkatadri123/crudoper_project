@@ -8,14 +8,23 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/login/')
 def show(request):
-    students = Student.objects.all()
-    return render(request, 'show.html', {'students': students})
+    username = request.user.username
+    if request.user.is_superuser:
+        students = Student.objects.all()
+        return render(request, 'show.html', {'students': students})
+    else:
+        if username.find('.com') > 0:
+            students = Student.objects.get(Email=username)
+        else:
+            students = Student.objects.get(Username=username)
+        return render(request, 'show1.html', {"students": students})
 
 
 @login_required(login_url='/login/')
 def view(request, id):
+    user = request.user.is_superuser
     student = Student.objects.get(Student_ID=id)
-    return render(request, 'view.html', {'student': student})
+    return render(request, 'view.html', {'student': student, "user":user})
 
 
 def update(request, id, user):
@@ -125,28 +134,37 @@ def register(request):
 
 
 def login(request):
+    name = None
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         if username.find(".com") > 0:
-            user = auth.authenticate(request, email=username, password=password)
-            if user:
-                auth.login(request, user)
-                return redirect('/show')
-            else:
-                messages.info(request, 'Invalid credentials.. email')
+            try:
+                student = Student.objects.get(Email=username)
+                name = student.Username
+            except Exception as e:
+                messages.info(request, 'Invalid email')
                 return redirect('/login')
+            else:
+                user = auth.authenticate(request, username=student.Username, password=password)
+                if user:
+                    auth.login(request, user)
+                    return redirect('/show')
+                else:
+                    messages.info(request, 'Invalid credentials....')
+                    return redirect('/login')
         else:
             user = auth.authenticate(request, username=username, password=password)
+            name = user
             if user is not None:
                 auth.login(request, user)
                 return redirect('/show')
             else:
-                messages.info(request, 'Invalid credentials.. User')
+                messages.info(request, 'Invalid credentials....')
                 return redirect('/login')
 
     else:
-        return render(request, 'login.html')
+        return render(request, 'login.html', {"student": name})
 
 
 def logout(request):

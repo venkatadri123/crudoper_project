@@ -11,7 +11,14 @@
     <!-- Student Details -->
     <div class="destination item">
         <div class="destination_image">
-            <img src="{{ student.Image.url }}" height="10%" width="10%">
+            {% if user %}
+                <img src="{{ student.Image.url }}" height="10%" width="10%">
+            {% elif student.Approvel %}
+                <img src="{{ student.Image.url }}" height="10%" width="10%">
+            {% else %}
+                <img src="{{ student.Image }}" height="10%" width="10%">
+            {% endif %}
+
         </div>
         <div class="d_content">
             <div class="destination_title">Student_ID:{{ student.Student_ID }}</div>

@@ -8,6 +8,7 @@ class Student(models.Model):
     Username = models.CharField(max_length=100)
     Name = models.CharField(max_length=100)
     Email = models.EmailField()
+    Approvel = models.BooleanField(verbose_name="Approved", default=False)
     School = models.CharField(max_length=100)
     Program = models.CharField(max_length=100)
     Batch = models.IntegerField()

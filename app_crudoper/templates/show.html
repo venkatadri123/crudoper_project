@@ -26,8 +26,6 @@
     <tbody>
         {% for stu in students %}
             <tr>
-{#                <td><img src="{{ URL:: to('/') }}/images/{{ stu.Image }}" width="10%"></td>#}
-{#                <td><img src="{{ baseUrl }}/{{ stu.Image }}" alt=""></td>#}
                 <td><img src="{{ stu.Image.url }}" alt="" class="img-thumbnail" width="30%" height="30%"></td>
                 <td>{{ stu.Student_ID }}</td>
                 <td>{{ stu.Name }}</td>
