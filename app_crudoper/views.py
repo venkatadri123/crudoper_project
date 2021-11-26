@@ -21,7 +21,6 @@ def show(request):
         return render(request, 'show1.html', {"students": students})
 
 
-
 @login_required(login_url='/login/')
 def view(request, id):
     user = request.user.is_superuser
@@ -167,6 +166,7 @@ def login(request):
 
     else:
         return render(request, 'login.html', {"student": name})
+
 
 
 def logout(request):
