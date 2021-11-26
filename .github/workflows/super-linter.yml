@@ -1,26 +1,31 @@
-name: Pylint
-
-on: [push, pull_request, pull_request_review, pull_request_target, pull_request_review_comment]
+name: Configure pyenv and pick the right version
+on: [push, pull_request]
 
 jobs:
-  build:
-
+ # python installtion
+  install-python:
+  # should run on linux based operating system
     runs-on: ubuntu-latest
-
+  
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v1
-      with:
-        python-version: 3.7
-        args: pylint --rcfile=.pylintrc crudoper_project
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-    - name: Analysing the code with pylint
-      run: |
-        pylint `ls -R|grep .py$|xargs`
-    - name: Analysing the code with pylint
-      run: |
-        find . -name '*.py' -exec pylint {} \;
+      - uses: actions/checkout@v2
+      - name: Install python version
+      # use the pyenv-action version 7
+        uses: gabrielfalcao/pyenv-action@v7
+        with:
+          default: 3.7 # pick 3.7 verion 
+          command: pip install -U pip  # upgrade pip after installing python
+      
+      - name: create environment
+        run: pyenv local 3.7 && python -mvenv .venv37
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt --upgrade pip
+
+
+      - name: setup pyenv
+        id: pyenv_installation
+        uses: "gabrielfalcao/pyenv-action@v7"
+
+      - name: debug pyenv
+        run: echo ${{ steps.pyenv_installation.outputs.pyenv_root }}
