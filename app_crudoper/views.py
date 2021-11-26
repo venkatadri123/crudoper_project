@@ -28,7 +28,6 @@ def view(request, id):
     return render(request, 'view.html', {'student': student, "user":user})
 
 
-
 def update(request, id, user):
     student = Student.objects.get(Student_ID=id)
     user = User.objects.get(username=user)
