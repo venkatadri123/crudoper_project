@@ -168,7 +168,6 @@ def login(request):
         return render(request, 'login.html', {"student": name})
 
 
-
 def logout(request):
     auth.logout(request)
     return redirect('/login')
