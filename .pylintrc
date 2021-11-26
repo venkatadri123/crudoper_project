@@ -111,7 +111,8 @@ disable=locally-disabled,
         no-else-return,
         no-else-raise,
         raise-missing-from,
-        fixme
+        fixme,
+        fatal
 
 
 # Enable the message, report, category or checker with the given id(s). You can
