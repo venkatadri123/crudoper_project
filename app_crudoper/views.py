@@ -141,7 +141,6 @@ def login(request):
         if username.find(".com") > 0:
             try:
                 student = Student.objects.get(Email=username)
-                name = student.Username
             except Exception as e:
                 messages.info(request, 'Invalid email')
                 return redirect('/login')
@@ -155,7 +154,6 @@ def login(request):
                     return redirect('/login')
         else:
             user = auth.authenticate(request, username=username, password=password)
-            name = user
             if user is not None:
                 auth.login(request, user)
                 return redirect('/show')
