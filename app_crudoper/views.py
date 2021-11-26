@@ -20,11 +20,13 @@ def show(request):
         return render(request, 'show1.html', {"students": students})
 
 
+
 @login_required(login_url='/login/')
 def view(request, id):
     user = request.user.is_superuser
     student = Student.objects.get(Student_ID=id)
     return render(request, 'view.html', {'student': student, "user":user})
+
 
 
 def update(request, id, user):
