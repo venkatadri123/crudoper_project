@@ -112,7 +112,11 @@ disable=locally-disabled,
         no-else-raise,
         raise-missing-from,
         fixme,
-        fatal
+        fatal,
+        no-member,
+        redefined-builtin,
+        no-member,
+        wrong-import-order,
         import-outside-toplevel
 
 # Enable the message, report, category or checker with the given id(s). You can
