@@ -1,6 +1,6 @@
 name: Pylint
 
-on: [push, pull_request]
+on: [push, pull_request, commit_comment]
 
 jobs:
   build:
@@ -21,7 +21,3 @@ jobs:
       - name: Analysing the code with pylint
         run: |
           find . -name '*.py' -exec pylint {} \;
-      - name: Python Pylint Github Action
-        # You may pin to the exact commit or the version.
-        # uses: fylein/python-pylint-github-action@cd8c363096fbae2650aef4bd02c670cb8a0c02c8
-        uses: fylein/python-pylint-github-action@v4
