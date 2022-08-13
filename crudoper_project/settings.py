@@ -76,9 +76,21 @@ WSGI_APPLICATION = 'crudoper_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'my_personal_db',
+        'USER': 'venkatadri',
+        'PASSWORD': 'Venkey@hari',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+    },
+    # 'postgress_db': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'mydatabase',
+    #     'USER': 'mydatabaseuser',
+    #     'PASSWORD': 'Venkey@hari',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '5432',
+    # }
 }
 
 
@@ -125,3 +137,10 @@ STATICFILES_DIR = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}

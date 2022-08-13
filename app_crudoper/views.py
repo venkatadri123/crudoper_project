@@ -87,11 +87,13 @@ def image_update(request, id):
 
 
 def destro(request, id, username):
-    print(request)
-    student = Student.objects.get(Student_ID=id)
-    student.delete()
-    user = User.objects.get(username=username)
-    user.delete()
+    if request.user.is_superuser:
+        student = Student.objects.get(Student_ID=id)
+        student.delete()
+        user = User.objects.get(username=username)
+        user.delete()
+    if not request.user.is_superuser:
+        messages.info(request, "You don't have remove access")
     return redirect('/show')
 
 
