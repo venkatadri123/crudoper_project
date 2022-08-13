@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
-from app_crudoper.models import Student
-from app_crudoper.forms import ImageUploadForm
-from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, auth
+from django.shortcuts import render, redirect
+
+from app_crudoper.forms import ImageUploadForm
+from app_crudoper.models import Student
 
 
 @login_required(login_url='/login/')
@@ -86,6 +87,7 @@ def image_update(request, id):
 
 
 def destro(request, id, username):
+    print(request)
     student = Student.objects.get(Student_ID=id)
     student.delete()
     user = User.objects.get(username=username)
@@ -141,8 +143,8 @@ def login(request):
         if username.find(".com") > 0:
             try:
                 student = Student.objects.get(Email=username)
-                name = student.Username
             except Exception as e:
+                print(e)
                 messages.info(request, 'Invalid email')
                 return redirect('/login')
             else:
@@ -155,7 +157,6 @@ def login(request):
                     return redirect('/login')
         else:
             user = auth.authenticate(request, username=username, password=password)
-            name = user
             if user is not None:
                 auth.login(request, user)
                 return redirect('/show')
