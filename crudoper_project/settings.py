@@ -83,14 +83,14 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
     },
-    # 'postgress_db': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'mydatabase',
-    #     'USER': 'mydatabaseuser',
-    #     'PASSWORD': 'Venkey@hari',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
+    'postgress_db': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'Venkey@hari',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
 
